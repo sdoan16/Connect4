@@ -42,6 +42,7 @@ export default function Connect4() {
     let row = board.length - 1;
     let player = turn ? "1" : "2";
     let boardCopy = [...board];
+    //Find row that chip drops into
     while (row >= 0) {
       if (board[row][j]) {
         row--;
@@ -63,6 +64,7 @@ export default function Connect4() {
       }, 1000);
       return;
     }
+    //Last slot was filled and no winner
     if (count === 41) {
       setGameOver(true);
       return;
@@ -114,6 +116,7 @@ export default function Connect4() {
     let count = 1;
     let i;
     let k;
+    //Check diagonal to the left and count number of same chip in a row
     if (rowNumber > 0 && j > 0) {
       i = rowNumber - 1;
       k = j + 1;
@@ -130,6 +133,7 @@ export default function Connect4() {
         k = k + 1;
       }
     }
+    //if count is still less than 4 check diagonal to the right
     i = rowNumber + 1;
     k = j - 1;
     while (i < ROWS && k >= 0) {
