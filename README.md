@@ -5,6 +5,7 @@
 - Git clone repository
 - Git pull
 - run npm install to install dependencies
+- run npm run dev
 - Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## How to Play
