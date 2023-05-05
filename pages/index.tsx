@@ -222,11 +222,11 @@ export default function Connect4() {
             {Array(7)
               .fill("")
               .map((arrow, i) => (
-                  <DropArrow j={i} dropChip={onClick}></DropArrow>
+                  <DropArrow key={`arrow-${i}`} j={i} dropChip={onClick}></DropArrow>
               ))}
           </div>
           {board.map((row, i) => (
-            <div className={boardStyles.row}>
+            <div key={`row-${i}`} className={boardStyles.row}>
               {row.map((tile: string | number, j: any) => (
                 <Tile key={`T${i}${j}`} value={tile}/>
               ))}
@@ -243,7 +243,7 @@ export default function Connect4() {
           title={`Player ${winner} won!!!`}
           onCloseComplete={() => setShowWinnerDialog(false)}
           hasFooter={true}
-        ></Dialog>
+        >{''}</Dialog>
       </Pane>
       <Pane>
         <Dialog
@@ -254,7 +254,7 @@ export default function Connect4() {
           title={`Game Over!`}
           onCloseComplete={() => setGameOver(false)}
           hasFooter={true}
-        ></Dialog>
+        >{''}</Dialog>
       </Pane>
     </div>
    </DndProvider>
