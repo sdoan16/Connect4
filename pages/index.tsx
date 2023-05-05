@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tile from "../components/tile";
 import {Chip} from "../components/chip";
 import boardStyles from "styles/board.module.css";
@@ -11,15 +11,6 @@ import DropArrow from "../components/dropArrow";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-const NEW_BOARD = [
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-];
-
 export const ChipTypes = {
   RED: 'red',
   YELLOW: 'yellow',
@@ -27,13 +18,30 @@ export const ChipTypes = {
 const ROWS = 6;
 const COL = 7;
 
+const createBoard = () => {
+ return [
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+];
+}
+
 export default function Connect4() {
-  const [board, setBoard] = useState( NEW_BOARD);
+  const [board, setBoard] = useState( createBoard());
   const [turn, setTurn] = useState(true);
   const [count, setCount] = useState(0);
   const [winner, setWinner] = useState("");
   const [showWinnerDialog, setShowWinnerDialog] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+
+  useEffect(() => {
+    if(count === 0) {
+      setTurn(true)
+    }
+  }, [count])
 
   const onClick = (j: number) => {
     if (winner || board[0][j]) {
@@ -77,15 +85,8 @@ export default function Connect4() {
   const resetBoard = () => {
     setWinner("");
     setGameOver(false);
-    setBoard([
-      ["", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", ""],
-    ]);
-    setTurn(true);
+    setBoard(createBoard());
+    setTurn(!turn);
     setCount(0);
     setShowWinnerDialog(false);
   };
@@ -226,7 +227,7 @@ export default function Connect4() {
           </div>
           {board.map((row, i) => (
             <div className={boardStyles.row}>
-              {row.map((tile, j) => (
+              {row.map((tile: string | number, j: any) => (
                 <Tile key={`T${i}${j}`} value={tile}/>
               ))}
             </div>
