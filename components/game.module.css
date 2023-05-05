@@ -1,0 +1,60 @@
+
+.tile {
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 85px;
+    background-color: rgb(1 134 249);
+    border: 1px solid rgb(149, 196, 223);
+    text-align: center;
+    font-size: 0px;
+    box-sizing: border-box;
+  }
+  .circle, .p1Circle, .p2Circle {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    color: black;
+  }
+  .circle {
+    position: relative;
+    background-color: white;
+    z-index: -2;
+  }
+  .p1Circle {
+    background-color: yellow;
+  }
+
+  .p2Circle {
+    background-color: red;
+  }
+  
+  .board {
+    background: lightblue;
+    color: black;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .instructions {
+    padding: 12px 0;
+  }
+  
+  .row {
+    display: flex;
+  }
+  
+  .p1Circle, .p2Circle{
+  position:absolute;
+  top: 100;
+    animation: drop 1s ease;
+    animation-iteration-count:1;
+  }
+  
+  @keyframes drop{
+    0%{opacity: 1; transform:  translateY(-450px); z-index: -1;}
+    70%{transform: translateY(0px); z-index: -1;}
+    100%{transform: translateY(0px); z-index: -1;}
+  }
